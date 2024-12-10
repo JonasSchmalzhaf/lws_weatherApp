@@ -5,5 +5,5 @@ import schwarz.it.lws.weatherapp.model.WeatherData
 import java.time.LocalDateTime
 
 interface WeatherRepository : JpaRepository<WeatherData, Long> {
-    fun findByCityName(city: String): List<WeatherData>
+    fun findByCity(city: String): List<WeatherData>
 }

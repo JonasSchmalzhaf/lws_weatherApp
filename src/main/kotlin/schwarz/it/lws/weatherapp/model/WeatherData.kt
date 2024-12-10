@@ -38,5 +38,4 @@ data class WeatherData (
     @Column(nullable = false)
     @CreationTimestamp
     val createdAt: LocalDateTime = LocalDateTime.now()
-
 )
