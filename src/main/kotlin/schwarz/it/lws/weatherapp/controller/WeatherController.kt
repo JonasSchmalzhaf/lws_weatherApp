@@ -11,7 +11,7 @@ import schwarz.it.lws.weatherapp.service.WeatherService
 class WeatherController(private val weatherService: WeatherService) {
     @GetMapping("/{city}")
     fun getWeatherForecast(@PathVariable city: String, @RequestParam days: Int): ResponseEntity<List<WeatherData>> {
-        require(days in 1..5) { "Anzahl der Tage muss zwischen 1 und 5 liegen" }
+        require(days in 0..5) { "Anzahl der Tage muss zwischen 0 und 5 liegen" }
         return ResponseEntity.ok(weatherService.getWeatherForecast(city, days))
     }
 }
