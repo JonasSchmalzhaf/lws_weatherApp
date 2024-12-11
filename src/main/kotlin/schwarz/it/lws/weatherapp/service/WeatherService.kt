@@ -18,6 +18,10 @@ class WeatherService(private val weatherRepository: WeatherRepository, private v
             getForecastFromOpenWeatherMap(city)
         }
 
+        if (weatherRepository.findByCity(city).filter { LocalDate.now() <= it.forecastDate && it.forecastDate <= LocalDate.now().plusDays(days.toLong()) }.size < days) {
+            refreshWeatherForecastData()
+        }
+
         return weatherRepository.findByCity(city).filter { LocalDate.now() <= it.forecastDate && it.forecastDate <= LocalDate.now().plusDays(days.toLong()) }
     }
 
@@ -26,8 +30,6 @@ class WeatherService(private val weatherRepository: WeatherRepository, private v
         val cities = mutableSetOf<String>()
 
         weatherRepository.findAll().forEach { weather -> cities.add(weather.city) }
-
-        weatherRepository.deleteAll()
 
         cities.forEach { city -> getForecastFromOpenWeatherMap(city) }
     }
@@ -38,6 +40,8 @@ class WeatherService(private val weatherRepository: WeatherRepository, private v
 
         val openWeatherMap = restTemplateBuilder.build()
         val receivedForecast = openWeatherMap.getForObject(uri, WeatherForecastModel.WeatherForecast::class.java)
+
+        weatherRepository.findByCity(city).filter { it.forecastDate > LocalDate.now().minusDays(1) }.forEach { weather -> weatherRepository.deleteById(weather.id!!) }
 
         forecastToDaily(receivedForecast!!).forEach { weather -> weatherRepository.save(weather) }
     }
