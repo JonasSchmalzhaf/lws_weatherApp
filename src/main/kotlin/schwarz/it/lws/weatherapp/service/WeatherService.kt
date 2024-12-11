@@ -57,8 +57,8 @@ class WeatherService(private val weatherRepository: WeatherRepository, private v
             minTemperatur = BigDecimal(dayForecast.minOf { it.main.temp_min }).setScale(1, RoundingMode.HALF_EVEN).toDouble(),
             maxTemperature = BigDecimal(dayForecast.maxOf { it.main.temp_max }).setScale(1, RoundingMode.HALF_EVEN).toDouble(),
             humidity = dayForecast.sumOf { it.main.humidity } / dayForecast.size,
-            description = dayForecast.groupingBy { it.weather.first().description }.eachCount().maxBy { it.value }.key,
-            iconCode = dayForecast.groupingBy { it.weather.first().icon }.eachCount().maxBy { it.value }.key,
+            description = dayForecast.filter { it.weather.first().icon.contains("d") }.groupingBy { it.weather.first().description }.eachCount().maxBy { it.value }.key,
+            iconCode = dayForecast.filter { it.weather.first().icon.contains("d") }.groupingBy { it.weather.first().icon }.eachCount().maxBy { it.value }.key,
         ))}
 
         return dailyForecast

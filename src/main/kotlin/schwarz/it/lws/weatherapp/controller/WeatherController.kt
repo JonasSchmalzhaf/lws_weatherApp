@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*
 import schwarz.it.lws.weatherapp.model.WeatherData
 import schwarz.it.lws.weatherapp.service.WeatherService
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/weather")
 class WeatherController(private val weatherService: WeatherService) {

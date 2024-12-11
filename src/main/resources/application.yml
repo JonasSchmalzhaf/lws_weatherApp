@@ -13,6 +13,7 @@ spring:
         bytecode:
           provider:
             dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 app:
   feature-flags:
