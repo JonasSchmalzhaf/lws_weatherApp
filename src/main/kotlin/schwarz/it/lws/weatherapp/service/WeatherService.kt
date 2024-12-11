@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service
 import schwarz.it.lws.weatherapp.model.WeatherData
 import schwarz.it.lws.weatherapp.model.WeatherForecastModel
 import schwarz.it.lws.weatherapp.repository.WeatherRepository
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -47,12 +49,12 @@ class WeatherService(private val weatherRepository: WeatherRepository, private v
         groupedList.forEach { (date, dayForecast) -> dailyForecast.add(WeatherData(
             city = forecast.city.name,
             forecastDate = LocalDate.of(date.split("-")[0].toInt(), date.split("-")[1].toInt(), date.split("-")[2].toInt()),
-            temperature = dayForecast.sumOf { it.main.temp } / dayForecast.size,
-            minTemperatur = dayForecast.minOf { it.main.temp_min },
-            maxTemperature = dayForecast.maxOf { it.main.temp_max },
+            temperature = BigDecimal(dayForecast.sumOf { it.main.temp } / dayForecast.size).setScale(1, RoundingMode.HALF_EVEN).toDouble(),
+            minTemperatur = BigDecimal(dayForecast.minOf { it.main.temp_min }).setScale(1, RoundingMode.HALF_EVEN).toDouble(),
+            maxTemperature = BigDecimal(dayForecast.maxOf { it.main.temp_max }).setScale(1, RoundingMode.HALF_EVEN).toDouble(),
             humidity = dayForecast.sumOf { it.main.humidity } / dayForecast.size,
             description = dayForecast.groupingBy { it.weather.first().description }.eachCount().maxBy { it.value }.key,
-            iconCode = dayForecast.groupBy { it.weather.first().icon }.keys.joinToString("\n")
+            iconCode = dayForecast.groupingBy { it.weather.first().icon }.eachCount().maxBy { it.value }.key,
         ))}
 
         return dailyForecast
