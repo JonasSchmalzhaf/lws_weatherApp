@@ -2,6 +2,7 @@ package schwarz.it.lws.weatherapp.model
 
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -15,7 +16,7 @@ data class WeatherData (
     val city: String,
 
     @Column(nullable = false)
-    val forecastDate: LocalDateTime,
+    val forecastDate: LocalDate,
 
     @Column(nullable = false)
     val temperature: Double,

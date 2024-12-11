@@ -14,14 +14,16 @@ class WeatherForecastModel {
     )
 
     data class Weather(
+        val id: Int,
+        val main: String,
         val description: String,
-        val icon: String,
+        val icon: String
     )
 
     data class HourForecast(
         val dt: Long,
         val main: Main,
-        val weather: Weather,
+        val weather: List<Weather>,
         val dt_txt: String,
     )
 
