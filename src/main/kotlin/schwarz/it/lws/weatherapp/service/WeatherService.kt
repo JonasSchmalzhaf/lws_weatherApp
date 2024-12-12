@@ -51,7 +51,7 @@ class WeatherService(private val weatherRepository: WeatherRepository, private v
                 weatherRepository.save(weather)
             }
         } catch (error: Exception) {
-            println(error.message);
+            println(error.message)
         }
     }
 

@@ -20,6 +20,16 @@ repositories {
 }
 
 dependencies {
+    // Test dependencies Kotlin
+    val kotestVersion = "5.+"
+    val mockkVersion = "1.+"
+
+    testImplementation(kotlin("test"))
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation("io.kotest:kotest-property:$kotestVersion")
+    testImplementation("io.mockk:mockk:$mockkVersion")
+
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
