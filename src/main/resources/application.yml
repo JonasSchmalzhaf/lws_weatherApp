@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: weatherApp
+  datasource:
+    url: jdbc:postgresql://localhost:5432/weatherapp
+    username: postgres
+    password: docker
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        bytecode:
+          provider:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  feature-flags:
+    new-ui: true
+  api:
+    timeout: 5000
