@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <!-- Graue Nebellinien mit unterschiedlichen Startpunkten -->
+  <g fill="none" stroke="rgba(169, 169, 169, 0.6)" stroke-width="3">
+    <line x1="-50" y1="30" x2="300" y2="30"/>
+    <line x1="-30" y1="60" x2="320" y2="60"/>
+    <line x1="0" y1="90" x2="340" y2="90"/>
+    <line x1="20" y1="120" x2="360" y2="120"/>
+    <line x1="50" y1="150" x2="0" y2="150"/>
+  </g>
+
+  <!-- Animation für Nebelbewegung -->
+  <style>
+    /* Alle Linien werden mit einer gleichen Bewegung animiert */
+    line {
+      animation: moveLines 15s linear infinite;
+    }
+
+    /* Definiert die Animation der Bewegung von links nach rechts */
+    @keyframes moveLines {
+      0% { transform: translateX(-100%); opacity: 0.6; }
+      100% { transform: translateX(100%); opacity: 0.6; }
+    }
+  </style>
+</svg>
