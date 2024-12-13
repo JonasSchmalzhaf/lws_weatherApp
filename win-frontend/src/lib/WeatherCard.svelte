@@ -17,6 +17,7 @@
     import Sunny from '../assets/mist.svg'
 
     export let forecastDate = "",  description = "", temperature = "", minTemperature = "", maxTemperature = "", humidity = "", iconCode = "", city="";
+
     function chooseIcon(iconCode){
         let iconImg = ""
         switch(iconCode){
@@ -62,7 +63,7 @@
       return iconImg;
     }
 
-        let iconImg = chooseIcon(iconCode)
+    let iconImg = chooseIcon(iconCode)
 </script>
 
 <main class="mt-4">
@@ -89,28 +90,6 @@
 <style>
     @import 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
 
-    .weather-icon {
-        width: 10vw;  
-        height: auto; 
-        }
-
-    @media (max-width: 768px) {
-        .weather-icon {
-            width: 15vw; 
-        }
-    }
-
-    @media (max-width: 480px) {
-        .weather-icon {
-            width: 20vw; 
-        }
-    }
-
-    .weather-icon{
-        width: 30px;
-        height: fit-content;
-    }
-
     .blue{
         color: #256FFF !important;
     }
@@ -121,16 +100,6 @@
 
     .yellow{
         color: #FAD5A5 !important;
-    }
-
-    .weather-icon {
-        width: 200;     
-        height: 200px;    
-        object-fit: cover; 
-    }
-
-    .big-text{
-        font-size: 90px;
     }
 
     .fade-in {
