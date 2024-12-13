@@ -1,9 +1,8 @@
 <script>
   import WeatherCard from './lib/WeatherCard.svelte';
   import { Container, Row, Input, Col, Form, FormGroup, Image} from '@sveltestrap/sveltestrap';
-  import { onMount } from 'svelte';
 
-  let days = 0; // Anzahl der Tage, für die Wetterdaten angezeigt werden
+  let days = 0; 
   let city = '';
   let weatherData = [];
   let error = null;
@@ -46,6 +45,17 @@
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
+  function getDayTime(string){
+    let date = new Date(string);
+    const weekFormat = new Intl.DateTimeFormat('de-DE', {weekday: 'long'});
+    const monthFormat = new Intl.DateTimeFormat('de-DE', {month: '2-digit', year: 'numeric'});
+
+    const weekDay = weekFormat.format(date);
+    const monthAndYear = monthFormat.format(date);
+
+    return `${weekDay}, ${monthAndYear}`;
+  }
+
 
 </script>
 
@@ -64,7 +74,6 @@
                 placeholder="Enter city name"
                 on:input={() => updateCity()}
               />
-
               <div class="slidecontainer mt-3">
                 <input type="range" min="0" max="5" class="slider" id="days" step="1" bind:value="{days}" on:input={() => updateCity()}>
                 <p class="fade-in">{chooseDay(days)}</p>
@@ -73,24 +82,22 @@
           </Form>
         </Container>
       </div>
-
       <Container class="bodyBody mb-4">
         {#if weatherData.length > 0}
           <Row cols={{lg: 3, md: 2, sm: 1}}>
-            <!-- svelte-ignore block_empty -->
-            {#each weatherData as day}
-              <!--<Col sm="12" md="4" lg="3" class="d-flex justify-content-center align-items-center">-->
+            {#each weatherData as day, index}
+              {#if index > 0}
                 <WeatherCard
                   city={capitalizeFirstLetter(city)}
-                  forecastDate={day.forecastDate}
-                  description={day.description}
+                  forecastDate={getDayTime(day.forecastDate)}
+                  description={capitalizeFirstLetter(day.description)}
                   temperature={day.temperature}
                   minTemperature={day.minTemperatur}
                   maxTemperature={day.maxTemperature}
                   humidity={day.humidity}
                   iconCode={day.iconCode}
                 />
-              <!-- </Col> -->
+              {/if}
             {/each}
           </Row>
         {/if}
@@ -101,45 +108,7 @@
 
 <style>
   @import 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
-
-  .moving-background {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Inhalt oben ausrichten */
-    align-items: center;
-    width: 100%;
-    min-height: 100vh; /* Mindestens die Höhe des Viewports */
-    background-image: url('/src/assets/background.jpg');
-    background-size: cover;
-    background-position: center center;
-    animation: moveBackground 30s linear infinite;
-    z-index: -1; /* Hintergrund hinter den anderen Elementen */
-  }
-  @keyframes moveBackground {
-    0% {
-      background-position: 0% center;
-    }
-    100% {
-      background-position: 0% center; 
-    }
-  }
-
   .title {
       text-align: center;
-  }
-
-  .fade-in {
-    opacity: 0;
-    animation: fadeInAnimation 0.5s forwards; /* 0.5s duration, fade-in on load */
-  }
-
-  /* Keyframes for fading in */
-  @keyframes fadeInAnimation {
-      0% {
-          opacity: 0;
-      }
-      100% {
-          opacity: 1;
-      }
   }
 </style>
