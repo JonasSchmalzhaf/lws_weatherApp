@@ -63,14 +63,19 @@
       }
       return iconImg;
     }
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
+
 </script>
 
 <main>
     <div class="header-container">
-        <h2>{city}</h2>
+        <h2>{capitalizeFirstLetter(city)}</h2>
         <h1>{Math.round(Number(temperature))}°</h1>
-        <h3>{description}</h3>
-        <div class="d-flex justify-content-center">
+        <h3>{capitalizeFirstLetter(description)}</h3>
+        <div class="d-flex justify-content-center mt-2">
             <label for="humidity"><Image src={drops} height=25/></label>
             <h4 class="ms-1" id="humidity">{humidity}%</h4>
         </div>

@@ -136,12 +136,12 @@
   function getDayTime(string){
     let date = new Date(string);
     const weekFormat = new Intl.DateTimeFormat('de-DE', {weekday: 'long'});
-    const monthFormat = new Intl.DateTimeFormat('de-DE', {month: '2-digit', year: 'numeric'});
+    const monthFormat = new Intl.DateTimeFormat('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'});
 
     const weekDay = weekFormat.format(date);
-    const monthAndYear = monthFormat.format(date);
+    const dayAndmonthAndYear = monthFormat.format(date);
 
-    return `${weekDay}, ${monthAndYear}`;
+    return `${weekDay}, ${dayAndmonthAndYear}`;
   }
 </script>
 
@@ -159,7 +159,7 @@
 
               <div class="slidecontainer mt-3">
                 <input type="range" min="0" max="4" class="slider" id="days" step="1" bind:value="{days}">
-                <p class="fade-in">{chooseDay()}</p>
+                <p class="fade-in" style="color: white;">{chooseDay()}</p>
               </div>
             </FormGroup>
           </Form>
@@ -186,7 +186,13 @@
           <Row>
             {#each weatherData as cards, index}
             {#if index > 0 && index <= days}
-              <div class="card-wrapper {getCardClass(index)}">
+              <div class="card-wrapper {
+              days === 1 ? 'col-12 row-span2 single-card'
+              : days === 2 ? 'col-6 col-sm-6 col-md-6 col-lg-6 single-card'
+              : days === 3 ? 'col-6 col-sm-6 col-md-6 col-lg-6 single-card'
+              : days === 4 ? 'col-6 col-sm-6 col-md-6 col-lg-6 double-card'
+              : 'col-12 row-span2 single-card'
+            }">
                 <WeatherCard
                 city={capitalizeFirstLetter(city)}
                 forecastDate={getDayTime(cards.forecastDate)}
@@ -253,8 +259,5 @@
       }
   }
 
-  .single-card {
-    display: flex;
-    justify-content: center;
-  }
+
 </style>

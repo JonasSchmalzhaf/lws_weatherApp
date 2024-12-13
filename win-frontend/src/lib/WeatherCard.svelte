@@ -16,7 +16,7 @@
     import Thunderstorm from '../assets/WeatherIcons/amcharts_weather_icons_1.0.0/animated/thunder.svg';
     import MinTemperatureIcon from '../assets/min_temperature.svg';
     import MaxTemperatureIcon from '../assets/max_temperature.svg';
-    import HumidityIcon from '../assets/humidity.svg';
+    import HumidityIcon from '../assets/humidity-white.png';
 
     export let forecastDate = "",  description = "", temperature = "", minTemperature = "", maxTemperature = "", humidity = "", iconCode = "", city="";
     
@@ -69,21 +69,27 @@
 </script>
 
 <main class="mt-4">
-    <div class="card fade-in p-4 text-bg-white text-white" style="max-width:400px; background-color: rgba(255,255,255,0.1); display:flex; flex-direction:column; align-items: center; justify-content: center;">
-        <CardTitle class="mx-auto" style="font-size: 40px; font-weight:900">{city}</CardTitle>
-        <CardText class="mx-auto" style="font-size: 20px;">{forecastDate}</CardText>
+    <div class="card fade-in p-4 text-bg-white text-white" style="max-width:450px; background-color: rgba(0,0,0,0.4); display:flex; flex-direction:column; align-items: center; justify-content: center;">
+        <CardTitle class="mx-auto" style="font-size: 2rem; font-weight: bold;">{forecastDate}</CardTitle>
         <CardImg src={iconImg} style="height: 15rem; width: auto; object-fit: contain; margin-top: -2rem;"/>
             <div style="display:flex; align-items:center; justify-content:center; margin-top:-3rem;">
                 <CardText class="mx-auto" style="font-size:30px">{description}</CardText>
             </div>
         <CardBody>
-            <div style="display:flex; align-items:center; justify-content:center; margin-top:1rem;">
-                <CardImg src="{MinTemperatureIcon}" style="height: 6rem; width: 3rem;"></CardImg>
-                <CardText style="font-size:30px;">{minTemperature}°C</CardText>
-                <CardImg src="{MaxTemperatureIcon}" style="height: 6rem; width: 3rem;"></CardImg>
-                <CardText style="font-size:30px;">{maxTemperature}°C</CardText>
-                <CardImg src="{HumidityIcon}" style="height: 6rem; width: 3rem"></CardImg>
-                <CardText style="margin-top: -1rem; font-size:30px;">{humidity}%</CardText>
+            <div style="display:flex; align-items:center; justify-content: space-around; margin-top:1rem;">
+                <div style="display: flex; align-items: center; margin-right: 2rem">
+                    <CardImg src="{MinTemperatureIcon}" style="height: 6rem; width: 3rem;"></CardImg>
+                    <CardText style="font-size:30px;">{Math.round(Number(minTemperature))}°C</CardText>
+                </div>
+                <div style="display: flex; align-items: center">
+                    <CardImg src="{MaxTemperatureIcon}" style="height: 6rem; width: 3rem;"></CardImg>
+                    <CardText style="font-size:30px;">{Math.round(Number(maxTemperature))}°C</CardText>
+                </div>
+
+            </div>
+            <div class="d-flex" style="justify-content: center; align-items: center">
+                <CardImg src="{HumidityIcon}" style="height: 2rem; width: 2rem"></CardImg>
+                <CardText style="font-size:30px;">{humidity}%</CardText>
             </div>
         </CardBody>
     </div>
