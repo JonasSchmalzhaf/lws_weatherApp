@@ -84,10 +84,7 @@ class WeatherService(
                         date.split("-")[1].toInt(),
                         date.split("-")[2].toInt()
                     ),
-                    temperature = BigDecimal(dayForecast.sumOf { it.main.temp } / dayForecast.size).setScale(
-                        1,
-                        RoundingMode.HALF_EVEN
-                    ).toDouble(),
+                    temperature = dayForecast[0].main.temp,
                     minTemperatur = BigDecimal(dayForecast.minOf { it.main.temp_min }).setScale(
                         1,
                         RoundingMode.HALF_EVEN
