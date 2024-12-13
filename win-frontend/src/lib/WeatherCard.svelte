@@ -19,6 +19,7 @@
     import HumidityIcon from '../assets/humidity.svg';
 
     export let forecastDate = "",  description = "", temperature = "", minTemperature = "", maxTemperature = "", humidity = "", iconCode = "", city="";
+    
     function chooseIcon(iconCode){
         let iconImg = ""
         switch(iconCode){
@@ -90,10 +91,12 @@
 
 <style>
     @import 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
+    
     .fade-in {
         opacity: 0;
         animation: fadeInAnimation 0.5s forwards;
     }
+
     @keyframes fadeInAnimation {
         0% {
             opacity: 0;
@@ -101,7 +104,5 @@
         100% {
             opacity: 1;
         }
-    }
-
-    
+    } 
 </style>

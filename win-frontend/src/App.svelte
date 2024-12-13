@@ -11,7 +11,6 @@
   import SunnyBG from './assets/Backgrounds/sunny.jpg';
   import ThunderstormBG from './assets/Backgrounds/thunderstorm.jpg';
   import MistBG from './assets/Backgrounds/mist.jpg';
-  import { Container, Row, Input, Col, Form, FormGroup, Image} from '@sveltestrap/sveltestrap';
 
   let days = 0; // Anzahl der Tage, für die Wetterdaten angezeigt werden
   let city = "";
@@ -131,8 +130,8 @@
   }
  
   function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
 
   function getDayTime(string){
     let date = new Date(string);
@@ -144,8 +143,6 @@
 
     return `${weekDay}, ${monthAndYear}`;
   }
-
-
 </script>
 
 <main>
@@ -156,27 +153,15 @@
         <Container >
           <Form inline>
             <FormGroup>
-              <Input
-                type="text"
-                id="city"
-                bind:value="{city}"
-                placeholder="Enter city name"
-                on:input={() => updateCity()}
-              />
+              <InputGroup size="lg">
+                <Input class="bg-dark text-white shadow-none border focus-ring" style="--bs-bg-opacity: 0.5; --bs-focus-ring-color: white;" type="text" id="city" bind:value="{city}" placeholder="Enter city name" on:input={() => updateCity()}/>
+              </InputGroup>
+
               <div class="slidecontainer mt-3">
                 <input type="range" min="0" max="4" class="slider" id="days" step="1" bind:value="{days}">
                 <p class="fade-in">{chooseDay()}</p>
               </div>
             </FormGroup>
-          <Form>
-            <InputGroup size="lg">
-              <Input class="bg-dark text-white shadow-none border focus-ring" style="--bs-bg-opacity: 0.5; --bs-focus-ring-color: white;" type="text" id="city" bind:value="{city}" placeholder="Enter city name" on:input={() => updateCity()}/>
-            </InputGroup>
-
-            <div class="slidecontainer mt-3">
-              <input type="range" min="0" max="5" class="slider" id="days" step="1" bind:value="{days}" on:input={() => updateCity()}>
-              <p class="fade-in">{chooseDay(days)}</p>
-            </div>
           </Form>
         </Container>
 
@@ -257,24 +242,6 @@
     background-position: center center;
     animation: moveBackground 30s linear infinite;
     z-index: -1; /* Hintergrund hinter den anderen Elementen */
-  }
-
-  @keyframes moveBackground {
-    0% {
-      background-position: 0% center;
-    }
-    100% {
-      background-position: 0% center;
-    }
-  }
-
-  .title {
-      text-align: center;
-  }
-
-  .fade-in {
-    opacity: 0;
-    animation: fadeInAnimation 0.5s forwards;
   }
 
   @keyframes fadeInAnimation {
