@@ -1,5 +1,6 @@
 <script>
     import {Card, CardBody, CardImg, CardText, CardTitle, Image, Label} from '@sveltestrap/sveltestrap'
+    import { fade } from 'svelte/transition';
 
     import ClearNight from '../assets/WeatherIcons/amcharts_weather_icons_1.0.0/animated/night.svg';
     import DarkCloud from '../assets/WeatherIcons/amcharts_weather_icons_1.0.0/animated/cloudy.svg';
@@ -63,14 +64,14 @@
       return iconImg;
     }
 
-        let iconImg = chooseIcon(iconCode)
+    let iconImg = chooseIcon(iconCode)
 </script>
 
 <main class="mt-4">
     <div class="card fade-in p-4 text-bg-white text-white" style="max-width:400px; background-color: rgba(255,255,255,0.1); display:flex; flex-direction:column; align-items: center; justify-content: center;">
         <CardTitle class="mx-auto" style="font-size: 40px; font-weight:900">{city}</CardTitle>
         <CardText class="mx-auto" style="font-size: 20px;">{forecastDate}</CardText>
-        <CardImg src={iconImg} style="height: 15rem; width: auto; object-fit: contain; margin-top: -2rem;"/>  
+        <CardImg src={iconImg} style="height: 15rem; width: auto; object-fit: contain; margin-top: -2rem;"/>
             <div style="display:flex; align-items:center; justify-content:center; margin-top:-3rem;">
                 <CardText class="mx-auto" style="font-size:30px">{description}</CardText>
             </div>
@@ -91,7 +92,7 @@
     @import 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
     .fade-in {
         opacity: 0;
-        animation: fadeInAnimation 0.5s forwards; 
+        animation: fadeInAnimation 0.5s forwards;
     }
     @keyframes fadeInAnimation {
         0% {
