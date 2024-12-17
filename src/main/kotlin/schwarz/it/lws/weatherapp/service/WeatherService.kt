@@ -50,7 +50,7 @@ class WeatherService(
 
     fun getForecastFromOpenWeatherMap(city: String) {
         val apiKey = "0a796a8566000abaaf2677586ccb7571"
-        val uri = "https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=$apiKey&units=metric"
+        val uri = "https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=$apiKey&units=metric&lang=de"
 
         try {
             val openWeatherMap = restTemplateBuilder.build()
