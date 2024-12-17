@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --outDir /Users/sauermax/Developer/lws_weatherApp/src/main/resources/static --emptyOutDir",
+    "build": "vite build --outDir /Users/schmalzhafj/Documents/SIT-Lehrwerkstatt/VertiefungAnwendungsentwicklung/KotlinProjekte/weatherApp/src/main/resources/static --emptyOutDir",
     "preview": "vite preview"
   },
   "devDependencies": {
