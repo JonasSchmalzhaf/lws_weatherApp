@@ -11,6 +11,7 @@
   import SunnyBG from './assets/Backgrounds/sunny.jpg';
   import ThunderstormBG from './assets/Backgrounds/thunderstorm.jpg';
   import MistBG from './assets/Backgrounds/mist.jpg';
+  import {onMount} from "svelte";
 
   let days = 0; // Anzahl der Tage, für die Wetterdaten angezeigt werden
   let city = "";
@@ -21,31 +22,12 @@
     const encodedCity = encodeURIComponent(city);
     const response = await fetch(`http://localhost:8080/api/weather/${encodedCity}?days=5`);
     const data = await response.json();
-    console.log('API response data:', data); // Überprüfe die Datenstruktur hier
     return data;
-  }
-      
-  function getCardClass(index) {
-    if (index === 1) {
-      return 'col-12 single-card'; // Eine Karte: zentrieren
-    } else if (index === 2) {
-      return 'col-6 col-sm-6 col-md-6 col-lg-6 single-card'; // Zwei Karten nebeneinander
-    } else if (index === 3) {
-      return 'col-4 col-sm-4 col-md-4 col-lg-4 single-card'; // Drei Karten nebeneinander
-    } else if (index === 4) {
-      return 'col-6 col-sm-6 col-md-6 col-lg-6 double-card'; // Vier Karten, je zwei nebeneinander
-    } else {
-      return 'col-4 col-sm-4 col-md-4 col-lg-4 double-card'; // Mehr als vier Karten, je vier nebeneinander
-    }
   }
 
   function updateCity() {
     weatherData = [];
     getWeather().then(data => data.forEach(day => weatherData = [...weatherData, day]));
-  }
-
-  function updateCards(){
-
   }
 
   function chooseDay(){
@@ -129,12 +111,12 @@
 
   }
  
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1)
+  function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1)
   }
 
-  function getDayTime(string){
-    let date = new Date(string);
+  function getDayTime(nonFormattedDate){
+    let date = new Date(nonFormattedDate);
     const weekFormat = new Intl.DateTimeFormat('de-DE', {weekday: 'long'});
     const monthFormat = new Intl.DateTimeFormat('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'});
 
@@ -143,6 +125,21 @@
 
     return `${weekDay}, ${dayAndmonthAndYear}`;
   }
+
+async function getUserLocation(){
+    const response = await fetch('http://www.geoplugin.net/json.gp?ip');
+    const data = await response.json();
+    const userCity =  data.geoplugin_city;
+    console.log(userCity);
+    return userCity;
+  }
+
+  async function startCurrentLocationWeatherScreen(){
+    city = await getUserLocation();
+    updateCity();
+  }
+ onMount(startCurrentLocationWeatherScreen)
+
 </script>
 
 <main>
@@ -194,10 +191,8 @@
               : 'col-12 row-span2 single-card'
             }">
                 <WeatherCard
-                city={capitalizeFirstLetter(city)}
                 forecastDate={getDayTime(cards.forecastDate)}
                 description={capitalizeFirstLetter(cards.description)}
-                temperature={cards.temperature}
                 minTemperature={cards.minTemperatur}
                 maxTemperature={cards.maxTemperature}
                 humidity={cards.humidity}

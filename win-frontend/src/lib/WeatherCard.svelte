@@ -18,7 +18,7 @@
     import MaxTemperatureIcon from '../assets/max_temperature.svg';
     import HumidityIcon from '../assets/humidity-white.png';
 
-    export let forecastDate = "",  description = "", temperature = "", minTemperature = "", maxTemperature = "", humidity = "", iconCode = "", city="";
+    export let forecastDate = "",  description = "",  minTemperature = "", maxTemperature = "", humidity = "", iconCode = "";
     
     function chooseIcon(iconCode){
         let iconImg = ""

@@ -19,50 +19,6 @@
 
     export let forecastDate = "",  description = "", temperature = "", minTemperature = "", maxTemperature = "", humidity = "", iconCode = "", city="";
 
-    function chooseIcon(iconCode){
-        let iconImg = ""
-        switch(iconCode){
-          case "01n": iconImg = ClearNight;
-          break;
-          case "01d": iconImg = SunnyWeather;
-          break;
-          case "02d": iconImg = FewClouds;
-          break;
-          case "02n": iconImg = FewCloudsNight;
-          break;
-          case "03d": iconImg = ScatteredClouds;
-          break;
-          case "03n": iconImg = ScatteredClouds;
-          break;
-          case "04n": iconImg = DarkCloud;
-          break;
-          case "04d": iconImg = DarkCloud;
-          break;
-          case "09d": iconImg = ShowerRain;
-          break;
-          case "09n": iconImg = ShowerRain;
-          break;
-          case "10d": iconImg = RainSun;
-          break;
-          case "10n": iconImg = RainMoon;
-          break;
-          case "11n": iconImg = Thunderstorm;
-          break;
-          case "11d": iconImg = Thunderstorm;
-          break;
-          case "13d": iconImg = Snow;
-          break;
-          case "13n": iconImg = Snow;
-          break;
-          case "50n": iconImg = Mist;
-          break;
-          case "50d": iconImg = Mist;
-          break;
-          default: iconImg = "";
-          break;
-      }
-      return iconImg;
-    }
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1)
@@ -76,7 +32,7 @@
         <h1>{Math.round(Number(temperature))}°</h1>
         <h3>{capitalizeFirstLetter(description)}</h3>
         <div class="d-flex justify-content-center mt-2">
-            <label for="humidity"><Image src={drops} height=25/></label>
+            <label for="humidity"><Image src={drops} height=25 /></label>
             <h4 class="ms-1" id="humidity">{humidity}%</h4>
         </div>
         
