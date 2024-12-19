@@ -186,4 +186,6 @@ class WeatherServiceTest {
         // Then
         verify(exactly = 1) { weatherRepository.save(any()) }
     }
+
+
 }

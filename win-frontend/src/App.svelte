@@ -138,8 +138,12 @@ async function getUserLocation(){
     city = await getUserLocation();
     updateCity();
   }
- onMount(startCurrentLocationWeatherScreen)
 
+  function refocus() {
+    document.getElementById("city").focus();
+  }
+
+  onMount(startCurrentLocationWeatherScreen)
 </script>
 
 <main>
@@ -151,7 +155,7 @@ async function getUserLocation(){
           <Form inline>
             <FormGroup>
               <InputGroup size="lg">
-                <Input class="bg-dark text-white shadow-none border focus-ring" style="--bs-bg-opacity: 0.5; --bs-focus-ring-color: white;" type="text" id="city" bind:value="{city}" placeholder="Enter city name" on:input={() => updateCity()}/>
+                <Input class="bg-dark text-white shadow-none border focus-ring" style="--bs-bg-opacity: 0.5; --bs-focus-ring-color: white;" type="text" id="city" bind:value="{city}" placeholder="Enter city name" on:blur={() => refocus()} on:input={() => updateCity()} autofocus/>
               </InputGroup>
 
               <div class="slidecontainer mt-3">
